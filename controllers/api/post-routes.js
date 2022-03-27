@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
-const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
 // get all users
@@ -52,14 +51,14 @@ router.get('/', (req, res) => {
         // include the Comment model here:
         {
           model: User,
-          attributes: ['username', 'twitter', 'github']
+          attributes: ['username']
         },
         {
           model: Comment,
           attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
           include: {
             model: User,
-            attributes: ['username', 'twitter', 'github']
+            attributes: ['username']
           }
         }
       ]
